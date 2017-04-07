@@ -67,7 +67,7 @@ echo "#"
 echo "#Configuring Grub..."
 # TODO : shorten the UUID-Part ^^
 # grep only UUID
-cryptsetup luksDump /dev/sda3 | grep UUID > test.txt
+cryptsetup luksDump /dev/sda3 | grep UUID > tempUUID.txt
 # renove UUID from string
 sed -ie 's/UUID:/ /g' tempUUID.txt
 # remove spaces and tabs from string
