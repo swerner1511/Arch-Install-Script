@@ -17,11 +17,11 @@ echo "#"
 echo "#Creating the partition layout..."
 parted --script /dev/sda \
     mklabel gpt \
-	mkpart primary 1MB 2MB \
+    mkpart primary 1MB 2MB \
     mkpart primary 2MB 1GB \
     set 1 bios_grub on \
-	mkpart logical 1GB 100% \
-	quit
+    mkpart logical 1GB 100% \
+    quit
 
 # Preparing the encrypted system partitions
 echo "#"
