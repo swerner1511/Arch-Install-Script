@@ -16,9 +16,8 @@ echo "###########################"
 echo "#"
 echo "#Creating the partition layout..."
 parted --script /dev/sda \
-    mklabel gpt \
-    mkpart primary 1MB 2MB \
-    mkpart primary 2MB 1GB \
+    mklabel msdos \
+    mkpart primary 1MB 1GB \
     set 1 bios_grub on \
     mkpart logical 1GB 100% \
     quit
@@ -26,27 +25,27 @@ parted --script /dev/sda \
 # Preparing the encrypted system partitions
 echo "#"
 echo "#Creating of the LUKS device.."
-cryptsetup -v --cipher aes-xts-plain64 --key-size 512 --hash sha512 --iter-time 10000 --use-urandom --verify-passphrase luksFormat /dev/sda3
+cryptsetup -v --cipher aes-xts-plain64 --key-size 512 --hash sha512 --iter-time 10000 --use-urandom --verify-passphrase luksFormat /dev/sda2
 echo "#"
 echo "Opening encrypted device..."
-cryptsetup luksOpen /dev/sda3 crypt0
+cryptsetup luksOpen /dev/sda2 crypt0
 echo "#"
 echo "#Creating partitions within the Luks device using LVM..."
 pvcreate /dev/mapper/crypt0
 vgcreate crypt0-vg0 /dev/mapper/crypt0
-lvcreate -L 6GiB -n swap crypt0-vg0
+lvcreate -L 1GiB -n swap crypt0-vg0
 lvcreate -L 50GiB -n root crypt0-vg0
 lvcreate -l 100%FREE -n home crypt0-vg0
 echo "#"
 echo "#Formatting the partitions..."
-mkfs.ext2 -L boot /dev/sda2
+mkfs.ext2 -L boot /dev/sda1
 mkfs.ext4 -L root /dev/mapper/crypt0--vg0-root
 mkfs.ext4 -L home /dev/mapper/crypt0--vg0-home
 mkswap -L swap /dev/mapper/crypt0--vg0-swap
 echo "#"
 echo "#Mount partitions..."
 mount -t ext4 /dev/mapper/crypt0--vg0-root /mnt
-mkdir /mnt/boot && mount -t ext2 /dev/sda2 /mnt/boot
+mkdir /mnt/boot && mount -t ext2 /dev/sda1 /mnt/boot
 mkdir /mnt/home && mount -t ext4 /dev/mapper/crypt0--vg0-home /mnt/home
 swapon /dev/mapper/crypt0--vg0-swap
 
@@ -63,7 +62,7 @@ cp arch-install-script-2.sh /mnt
 #Generate fstab
 echo "#"
 echo "#Generate fstab..."
-genfstab -p -U /mnt > /mnt/etc/fstab
+genfstab -p -U /mnt >> /mnt/etc/fstab
 echo "#"
 echo "#Chroot into the new install..."
 arch-chroot /mnt su -c "sh arch-install-script-2.sh"
