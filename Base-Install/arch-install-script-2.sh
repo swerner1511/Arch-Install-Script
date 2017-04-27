@@ -110,7 +110,7 @@ echo "#"
 echo "###################"
 echo "# gnome+extras... #"
 echo "###################"
-pacman -S gnome gnome-extras networkmanager networkmanager-openvpn networkmanager-vpnc network-manager-applet
+pacman -S gnome gnome-extra networkmanager networkmanager-openvpn networkmanager-vpnc network-manager-applet
 systemctl enable gdm.service
 systemctl enable NetworkManager.service
 echo "#"
