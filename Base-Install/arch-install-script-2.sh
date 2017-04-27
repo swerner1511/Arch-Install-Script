@@ -85,6 +85,40 @@ echo "#"
 echo "#Cleaning up..."
 rm ~/tempUUID.txt
 echo "#"
+echo "##################"
+echo "# xorg server... #"
+echo "##################"
+pacman -S xorg-server xorg-server-utils xorg-xinit
+localectl --no-convert set-x11-keymap de pc105 nodeadkeys
+echo "#"
+echo "######################"
+echo "# some basic pkgs... #"
+echo "######################"
+pacman -S acpid ntp htop cronie zip unzip unrar tmux smartmontools rsync pciutils p7zip openssh openssl hdparm lm_sensors net-tools nmap bind-tools openbsd-netcat sudo mtr whois linux-headers wget curl bash-completion parted git vim dosfstools ntfs-3g
+systemctl enable acpid
+systemctl enable cronie
+systemctl enable smartd
+ntpdate -u 0.de.pool.ntp.org
+hwclock -w
+echo "#"
+echo "#######################"
+echo "# graphical driver... #"
+echo "#######################"
+pacman -S xf86-video-intel
+pacman -S xf86-video-vesa
+echo "#"
+echo "###################"
+echo "# gnome+extras... #"
+echo "###################"
+pacman -S gnome gnome-extras networkmanager networkmanager-openvpn networkmanager-vpnc network-manager-applet
+systemctl enable gdm.service
+systemctl enable NetworkManager.service
+echo "#"
+echo "###########################"
+echo "# remove unwanted pkgs... #"
+echo "###########################"
+pacman -R baobab empathy epiphany totem accerciser aisleriot anjuta atomix five-or-more four-in-a-row gnome-2048 gnome-chess gnome-klotski gnome-mahjongg gnome-mines gnome-music gnome-nibbles gnome-robots gnome-sudoku gnome-taquin gnome-tetravex hitori iagno lightsoff orca quadrapassel swell-foop tali
+echo "#"
 echo "#Exit from chroot environment..."
 exit
 
