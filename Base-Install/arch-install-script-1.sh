@@ -58,6 +58,8 @@ echo "#"
 echo "#Bootstrapping Arch..."
 pacstrap /mnt base base-devel wpa_supplicant dialog
 
+#download the second script for chroot part
+wget https://raw.githubusercontent.com/swerner1511/Arch-Install-Script/master/Base-Install/arch-install-script-2.sh
 #copy second script to /mnt 
 cp arch-install-script-2.sh /mnt
 #Generate fstab
