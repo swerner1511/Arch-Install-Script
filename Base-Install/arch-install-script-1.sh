@@ -87,5 +87,6 @@ echo "#"
 echo "#Closing Luks device..."
 cryptsetup luksClose crypt0
 echo "#"
-echo "#Reboot"
-reboot
+echo "#Reboot and remove media ..."
+echo "Just type reboot..."
+
