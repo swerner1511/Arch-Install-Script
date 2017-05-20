@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Created by S. W.
-# latest update 07.04.2017
+# latest update 20.05.2017
 #
 # A script for archlinux to prepare the hard disk, 
 # install 'base base-devel wpa_supplicant dialog' and etc.
