@@ -17,10 +17,10 @@ echo "#"
 echo "#Creating the partition layout..."
 parted --script /dev/sda \
     mklabel msdos \
-	mkpart primary 1MB 513MB \
+    mkpart primary 1MB 513MB \
     set 1 boot on \
-	mkpart logical 513MB 100% \
-	quit
+    mkpart logical 513MB 100% \
+    quit
 
 # Preparing the encrypted system partitions
 echo "#"
