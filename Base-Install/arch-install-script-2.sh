@@ -67,7 +67,7 @@ echo "#"
 echo "#Configuring Grub..."
 # TODO : shorten the UUID-Part ^^
 # grep only UUID
-cryptsetup luksDump /dev/sda3 | grep UUID > tempUUID.txt
+cryptsetup luksDump /dev/sda2 | grep UUID > tempUUID.txt
 # renove UUID from string
 sed -ie 's/UUID:/ /g' tempUUID.txt
 # remove spaces and tabs from string
@@ -76,14 +76,14 @@ sed -ie 's/^[ \t]*//' tempUUID.txt
 TempUUID=$(<tempUUID.txt)
 sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet"/GRUB_CMDLINE_LINUX_DEFAULT="cryptdevice=UUID='"${TempUUID}"':crypt0"/g' /etc/default/grub
 echo "#"
+echo "#Cleaning up..."
+rm ~/tempUUID.txt
+echo "#"
 echo "#Install grub to disk..."
 grub-install /dev/sda
 echo "#"
 echo "#Generate Grub config..."
 grub-mkconfig -o /boot/grub/grub.cfg
-echo "#"
-echo "#Cleaning up..."
-rm ~/tempUUID.txt
 echo "#"
 echo "##################"
 echo "# xorg server... #"
@@ -105,6 +105,7 @@ echo "#######################"
 echo "# graphical driver... #"
 echo "#######################"
 pacman -S --needed --noconfirm xf86-video-intel
+# fallback gpu driver - xf86-video-vesa
 pacman -S --needed --noconfirm xf86-video-vesa
 echo "#"
 echo "###################"
