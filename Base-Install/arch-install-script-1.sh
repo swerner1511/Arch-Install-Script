@@ -19,7 +19,7 @@ parted --script /dev/sda \
     mklabel msdos \
     mkpart primary 1MB 513MB \
     set 1 boot on \
-    mkpart logical 513MB 100% \
+    mkpart primary 513MB 100% \
     quit
 
 # Preparing the encrypted system partitions
