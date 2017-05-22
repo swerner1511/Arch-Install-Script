@@ -94,7 +94,7 @@ echo "#"
 echo "######################"
 echo "# some basic pkgs... #"
 echo "######################"
-pacman -S --needed --noconfirm acpid ntp htop cronie zip unzip unrar tmux smartmontools rsync pciutils p7zip openssh openssl hdparm lm_sensors net-tools nmap bind-tools openbsd-netcat sudo mtr whois linux-headers wget curl bash-completion parted git vim dosfstools ntfs-3g
+pacman -S --needed --noconfirm acpid ntp htop cronie zip unzip unrar smartmontools rsync pciutils p7zip openssh openssl hdparm lm_sensors net-tools nmap bind-tools openbsd-netcat sudo mtr whois linux-headers wget curl bash-completion parted git vim dosfstools ntfs-3g
 systemctl enable acpid
 systemctl enable cronie
 systemctl enable smartd
