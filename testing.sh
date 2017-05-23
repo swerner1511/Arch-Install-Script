@@ -55,10 +55,10 @@ parted -s $DISK set 1 boot on
 # Preparing the encrypted system partitions
 echo "#"
 echo "#Creating of the LUKS device.."
-cryptsetup -v --cipher aes-xts-plain64 --key-size 512 --hash sha512 --iter-time 10000 --use-urandom --verify-passphrase luksFormat /dev/${DISK}2
+cryptsetup -v --cipher aes-xts-plain64 --key-size 512 --hash sha512 --iter-time 10000 --use-urandom --verify-passphrase luksFormat ${DISK}2
 echo "#"
 echo "Opening encrypted device..."
-cryptsetup luksOpen /dev/${DISK}2 crypt0
+cryptsetup luksOpen ${DISK}2 crypt0
 echo "#"
 echo "#Creating partitions within the Luks device using LVM..."
 pvcreate /dev/mapper/crypt0
@@ -68,14 +68,14 @@ lvcreate -L $ROOTSIZE -n root crypt0-vg0
 lvcreate -l 100%FREE -n home crypt0-vg0
 echo "#"
 echo "#Formatting the partitions..."
-mkfs.ext2 -L boot /dev/${DISK}1
+mkfs.ext2 -L boot ${DISK}1
 mkfs.ext4 -L root /dev/mapper/crypt0--vg0-root
 mkfs.ext4 -L home /dev/mapper/crypt0--vg0-home
 mkswap -L swap /dev/mapper/crypt0--vg0-swap
 echo "#"
 echo "#Mount partitions..."
 mount -t ext4 /dev/mapper/crypt0--vg0-root /mnt
-mkdir /mnt/boot && mount -t ext2 /dev/${DISK}1 /mnt/boot
+mkdir /mnt/boot && mount -t ext2 ${DISK}1 /mnt/boot
 mkdir /mnt/home && mount -t ext4 /dev/mapper/crypt0--vg0-home /mnt/home
 swapon /dev/mapper/crypt0--vg0-swap
 
