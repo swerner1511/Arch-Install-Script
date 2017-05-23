@@ -74,10 +74,15 @@ mkfs.ext4 -L home /dev/mapper/crypt0--vg0-home
 mkswap -L swap /dev/mapper/crypt0--vg0-swap
 echo "#"
 echo "#Mount partitions..."
-mount -t ext4 /dev/mapper/crypt0--vg0-root /mnt
-mkdir /mnt/boot && mount -t ext2 ${DISK}1 /mnt/boot
-mkdir /mnt/home && mount -t ext4 /dev/mapper/crypt0--vg0-home /mnt/home
+mount /dev/mapper/crypt0--vg0-root /mnt
+mkdir /mnt/boot
+mount ${DISK}1 /mnt/boot
+mkdir /mnt/home
+mount /dev/mapper/crypt0--vg0-home /mnt/home
 swapon /dev/mapper/crypt0--vg0-swap
+
+echo "Continue...?"
+read
 
 ### Installing & configuring Arch Linux
 echo "#######################################"
