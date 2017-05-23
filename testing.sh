@@ -23,7 +23,7 @@ echo "###################"
 echo "#"
 echo "#You have to edit the Variables Section to your needs."
 echo "#Opening script with nano..."
-nano ./01-preconfig.sh
+nano ./testing.sh
 
 # Loading default keymap for Arch live system
 echo "#"
