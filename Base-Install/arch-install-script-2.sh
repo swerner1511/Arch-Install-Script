@@ -7,8 +7,11 @@
 # install 'base base-devel wpa_supplicant dialog' and etc.
 
 echo "#"
+echo "#install reflector"
+pacman -S --needed --noconfirm reflector
+echo "#"
 echo "#Update mirror list..."
-curl "https://www.archlinux.org/mirrorlist/?country=FI&country=DE&country=IS&country=LU&country=NL&country=NZ&country=CH&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on" | sed 's/#Server/Server/g' > /etc/pacman.d/mirrorlist
+reflector --verbose -l 5 -p https --sort rate --save /etc/pacman.d/mirrorlist
 pacman -Syu
 echo "#"
 echo "#Set Hostname"
@@ -56,7 +59,7 @@ echo "#Set console keymap..."
 echo "KEYMAP=de-latin1-nodeadkeys" > /etc/vconsole.conf
 echo "#"
 echo "#Add scripts to ramdisk..."
-sed -i '/HOOKS="base udev autodetect modconf block filesystems keyboard fsck"/c\HOOKS="base udev autodetect modconf keyboard block encrypt lvm2 filesystems fsck"' /etc/mkinitcpio.conf
+sed -i '/HOOKS="base udev autodetect modconf block filesystems keyboard fsck"/c\HOOKS="base udev autodetect modconf keyboard keymap block encrypt lvm2 filesystems fsck"' /etc/mkinitcpio.conf
 echo "#"
 echo "#Regenerate ramdisk..."
 mkinitcpio -p linux
