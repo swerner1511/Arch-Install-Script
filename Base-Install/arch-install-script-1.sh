@@ -33,7 +33,7 @@ echo "#"
 echo "#Creating partitions within the Luks device using LVM..."
 pvcreate /dev/mapper/crypt0
 vgcreate crypt0-vg0 /dev/mapper/crypt0
-lvcreate -L 1GiB -n swap crypt0-vg0
+lvcreate -L &GiB -n swap crypt0-vg0
 lvcreate -L 50GiB -n root crypt0-vg0
 lvcreate -l 100%FREE -n home crypt0-vg0
 echo "#"
