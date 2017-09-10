@@ -26,7 +26,7 @@ sed -ie 's/#en_US/en_US/g' /etc/locale.gen
 locale-gen
 echo "#"
 echo "#Set default locales..."
-echo "LANG=en_US.UTF-8
+echo "LANG=de_DE.UTF-8
 LC_CTYPE="de_DE.UTF-8"
 LC_NUMERIC="de_DE.UTF-8"
 LC_TIME="de_DE.UTF-8"
