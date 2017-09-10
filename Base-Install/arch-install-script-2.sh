@@ -91,7 +91,7 @@ echo "#"
 echo "##################"
 echo "# xorg server... #"
 echo "##################"
-pacman -S --needed --noconfirm xorg-server xorg-server-utils xorg-xinit
+pacman -S --needed --noconfirm xorg-server xorg-apps xorg-xinit
 localectl --no-convert set-x11-keymap de pc105 nodeadkeys
 echo "#"
 echo "######################"
