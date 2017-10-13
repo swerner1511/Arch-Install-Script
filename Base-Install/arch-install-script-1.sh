@@ -55,7 +55,7 @@ echo "# Installing & configuring Arch Linux #"
 echo "#######################################"
 echo "#"
 echo "#Bootstrapping Arch..."
-pacstrap /mnt base base-devel wpa_supplicant dialog
+pacstrap /mnt base base-devel wpa_supplicant dialog intel-ucode
 
 #download the second script for chroot part
 wget https://raw.githubusercontent.com/swerner1511/Arch-Install-Script/master/Base-Install/arch-install-script-2.sh
