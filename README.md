@@ -1,2 +1,2 @@
 # Arch-Install-Script
-A basic archlinux install script for a quick setup.
+A basic archlinux(with gnome de) install script for a quick setup.
