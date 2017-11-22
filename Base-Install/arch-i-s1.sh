@@ -72,7 +72,7 @@ arch-chroot /mnt su -c "sh arch-install-script-2.sh"
 #### Waiting for finishing chroot session
 
 ##3# Clean up, unmount all and reboot
-rm /mnt/arch-install-script-2.sh
+rm /mnt/arch-i-s2.sh
 echo "#"
 echo "#Unmounting all partitions..."
 umount /mnt/boot
