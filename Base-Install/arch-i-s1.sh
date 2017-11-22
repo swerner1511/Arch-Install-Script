@@ -67,7 +67,7 @@ echo "#Generate fstab..."
 genfstab -p -U /mnt >> /mnt/etc/fstab
 echo "#"
 echo "#Chroot into the new install..."
-arch-chroot /mnt su -c "sh arch-install-script-2.sh"
+arch-chroot /mnt su -c "sh arch-i-s2.sh"
 
 #### Waiting for finishing chroot session
 
