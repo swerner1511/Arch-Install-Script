@@ -38,10 +38,10 @@ lvcreate -L 50GiB -n root vg0
 lvcreate -l 100%FREE -n home vg0
 echo "#"
 echo "#Formatting the partitions..."
-mkfs.ext2 -L boot /dev/sda1
-mkfs.ext4 -L root /dev/mapper/vg0-root
-mkfs.ext4 -L home /dev/mapper/vg0-home
-mkswap -L swap /dev/mapper/vg0-swap
+mkfs.ext2 -L BOOT /dev/sda1
+mkfs.ext4 -L ROOT /dev/mapper/vg0-root
+mkfs.ext4 -L HOME /dev/mapper/vg0-home
+mkswap -L SWAP /dev/mapper/vg0-swap
 echo "#"
 echo "#Mount partitions..."
 mount -t ext4 /dev/mapper/vg0-root /mnt
@@ -55,7 +55,7 @@ echo "# Installing & configuring Arch Linux #"
 echo "#######################################"
 echo "#"
 echo "#Bootstrapping Arch..."
-pacstrap /mnt base base-devel wpa_supplicant dialog intel-ucode
+pacstrap /mnt base base-devel wpa_supplicant dialog intel-ucode bash-completion
 
 #download the second script for chroot part
 wget https://raw.githubusercontent.com/swerner1511/Arch-Install-Script/master/Base-Install/arch-i-s2.sh
