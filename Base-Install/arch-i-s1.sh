@@ -33,21 +33,21 @@ echo "#"
 echo "#Creating partitions within the Luks device using LVM..."
 pvcreate /dev/mapper/crypt0
 vgcreate vg0 /dev/mapper/crypt0
-lvcreate -L 1GiB -n swap vg0
-lvcreate -L 50GiB -n root vg0
-lvcreate -l 100%FREE -n home vg0
+lvcreate -L 1GiB -n SWAP vg0
+lvcreate -L 50GiB -n ROOT vg0
+lvcreate -l 100%FREE -n HOME vg0
 echo "#"
 echo "#Formatting the partitions..."
 mkfs.ext2 -L BOOT /dev/sda1
-mkfs.ext4 -L ROOT /dev/mapper/vg0-root
-mkfs.ext4 -L HOME /dev/mapper/vg0-home
-mkswap -L SWAP /dev/mapper/vg0-swap
+mkfs.ext4 -L ROOT /dev/mapper/vg0-ROOT
+mkfs.ext4 -L HOME /dev/mapper/vg0-HOME
+mkswap -L SWAP /dev/mapper/vg0-SWAP
 echo "#"
 echo "#Mount partitions..."
 mount -t ext4 /dev/mapper/vg0-root /mnt
 mkdir /mnt/boot && mount -t ext2 /dev/sda1 /mnt/boot
-mkdir /mnt/home && mount -t ext4 /dev/mapper/vg0-home /mnt/home
-swapon /dev/mapper/vg0-swap
+mkdir /mnt/home && mount -t ext4 /dev/mapper/vg0-HOME /mnt/home
+swapon /dev/mapper/vg0-SWAP
 
 ##2# Installing & configuring Arch Linux
 echo "#######################################"
@@ -65,6 +65,8 @@ cp arch-i-s2.sh /mnt
 echo "#"
 echo "#Generate fstab..."
 genfstab -p -U /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
+read
 echo "#"
 echo "#Chroot into the new install..."
 arch-chroot /mnt su -c "sh arch-i-s2.sh"
