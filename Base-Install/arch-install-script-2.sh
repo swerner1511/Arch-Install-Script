@@ -1,7 +1,8 @@
+
 #!/bin/bash
 
 # Created by S. W.
-# latest update 22.05.2017
+# latest update 22.11.2017
 #
 # A script for archlinux to prepare the hard disk, 
 # install 'base base-devel wpa_supplicant dialog' and etc.
@@ -65,16 +66,17 @@ echo "#"
 echo "##################"
 echo "# xorg server... #"
 echo "##################"
-pacman -S --needed --noconfirm xorg-server xorg-apps xorg-xinit
+pacman -S --needed --noconfirm xorg-server xorg-xinit
 localectl --no-convert set-x11-keymap de pc105 nodeadkeys
 echo "#"
 echo "######################"
 echo "# some basic pkgs... #"
 echo "######################"
-pacman -S --needed --noconfirm acpid ntp htop cronie zip unzip unrar smartmontools rsync pciutils p7zip openssh openssl hdparm lm_sensors net-tools nmap bind-tools openbsd-netcat sudo mtr whois linux-headers wget curl bash-completion parted git vim dosfstools ntfs-3g
+pacman -S --needed --noconfirm acpid avahi cups cronie firefox firefox-i18n-de thunderbird thunderbird-i18n-de
 systemctl enable acpid
+systemctl enable avahi-daemon
 systemctl enable cronie
-systemctl enable smartd
+systemctl enable org.cups.cupsd.service
 ntpdate -u 0.de.pool.ntp.org
 hwclock -w
 echo "#"
@@ -82,15 +84,14 @@ echo "#######################"
 echo "# graphical driver... #"
 echo "#######################"
 pacman -S --needed --noconfirm xf86-video-intel
-# fallback gpu driver - xf86-video-vesa
-pacman -S --needed --noconfirm xf86-video-vesa
 echo "#"
 echo "###################"
 echo "# gnome+extras... #"
 echo "###################"
-pacman -S --needed --noconfirm gnome gnome-extra networkmanager networkmanager-openvpn networkmanager-vpnc network-manager-applet
+pacman -S --needed --noconfirm gnome gnome-extra
 systemctl enable gdm.service
 systemctl enable NetworkManager.service
+pacman -S --needed --noconfirm system-config-printer
 echo "#"
 echo "###########################"
 echo "# remove unwanted pkgs... #"
@@ -117,4 +118,3 @@ passwd
 echo "#"
 echo "#Exit from chroot environment..."
 exit
-
