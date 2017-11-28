@@ -16,7 +16,9 @@ reflector --verbose -l 5 -p https --sort rate --save /etc/pacman.d/mirrorlist
 pacman -Syu
 echo "#"
 echo "#Set Hostname"
-echo "tardis-nb" > /etc/hostname
+echo "Enter your Hostname..."
+read HOSTNAME
+echo "$HOSTNAME" > /etc/hostname
 echo "#"
 echo "#Set Time zone"
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
