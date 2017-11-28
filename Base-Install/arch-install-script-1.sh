@@ -33,9 +33,9 @@ echo "#"
 echo "#Creating partitions within the Luks device using LVM..."
 pvcreate /dev/mapper/crypt0
 vgcreate vg0 /dev/mapper/crypt0
-lvcreate -L 1GiB -n swap vg0
-lvcreate -L 50GiB -n root vg0
-lvcreate -l 100%FREE -n home vg0
+lvcreate -L 1GiB -n swap
+lvcreate -L 50GiB -n root
+lvcreate -l 100%FREE -n home
 echo "#"
 echo "#Formatting the partitions..."
 mkfs.ext2 -L boot /dev/sda1
