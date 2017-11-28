@@ -64,7 +64,7 @@ cp arch-install-script-2.sh /mnt
 #Generate fstab
 echo "#"
 echo "#Generate fstab..."
-genfstab -p -U /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab
 echo "#"
 echo "#Chroot into the new install..."
 arch-chroot /mnt su -c "sh arch-install-script-2.sh"
